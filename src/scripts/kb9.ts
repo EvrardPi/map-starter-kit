@@ -100,7 +100,7 @@ WA.onInit().then(async () => {
         id: "salut mec",
         label: 'tu passes par qui ?',
         callback: async (_event) => {
-            console.log("je passe par feneu");
+            console.log("je passe par feneu test");
         }
     });
 
