@@ -27,6 +27,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 index: "./index.html",
+                colors: "./src/html/colors.html",
                 ...getMapsScripts(maps),
             },
         },

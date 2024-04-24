@@ -19,18 +19,18 @@ async function getPlayers(): Promise<Set<string>> {
 
 WA.onInit().then(async () => {
 
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
+    // console.log('Script started successfully');
 
     // si leur code galère ici ca va bloquer
     // await getPlayers()
@@ -100,7 +100,7 @@ WA.onInit().then(async () => {
         id: "salut mec",
         label: 'tu passes par qui ?',
         callback: async (_event) => {
-            console.log("je passe par feneu test");
+            // console.log("je passe par feneu test");
         }
     });
 

@@ -19,6 +19,32 @@ WA.onInit().then(() => {
 
     WA.room.area.onLeave('clock').subscribe(closePopup)
 
+    let noteWebsite: any;
+
+    WA.ui.actionBar.addButton({
+        id: 'choose-tile-color-btn',
+        type: 'action',
+        imageSrc: 'test',
+        toolTip: 'Select tile color',
+        callback: async () => {
+            noteWebsite = await WA.ui.website.open({
+                url: "./src/html/colors.html",
+                position: {
+                    vertical: "top",
+                    horizontal: "middle",
+                },
+                size: {
+                    height: "30vh",
+                    width: "80vw",
+                },
+                margin: {
+                    top: "77vh",
+                },
+                allowApi: true,
+            });
+        }
+    });
+
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
     bootstrapExtra().then(() => {
         console.log('Scripting API Extra ready');
