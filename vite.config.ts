@@ -28,6 +28,7 @@ export default defineConfig({
             input: {
                 index: "./index.html",
                 colors: "./src/html/colors.html",
+                countdown: "./src/html/countdwon.html",
                 ...getMapsScripts(maps),
             },
         },

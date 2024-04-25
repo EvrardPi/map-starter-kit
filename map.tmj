@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map..tmj"
+        }
+    },
  "height":25,
  "infinite":false,
  "layers":[
@@ -204,6 +212,30 @@
                  "width":0,
                  "x":378,
                  "y":644
+                }, 
+                {
+                 "height":0,
+                 "id":4,
+                 "name":"players",
+                 "point":true,
+                 "rotation":0,
+                 "type":"variable",
+                 "visible":true,
+                 "width":0,
+                 "x":458.666666666667,
+                 "y":641.333333333333
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"isTilePlaced",
+                 "point":true,
+                 "rotation":0,
+                 "type":"variable",
+                 "visible":true,
+                 "width":0,
+                 "x":536,
+                 "y":644
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -212,7 +244,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":4,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "properties":[
         {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://play.workadventu.re/iframe_api.js"></script>
+        <script type="module" src="../scripts/countdown.ts"></script>
+        <style>
+            body {
+                font-family: Roboto, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-size: 1rem;
+            }
+
+            .container{
+                background: rgba(27, 27, 41, 0.95);
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: white;
+                width: fit-content;
+            }
+
+            .container p {
+                margin: 0rem;
+                font-size: 0.8rem;
+
+            }
+
+            #countdown {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <p>Place a new tile in :</p>
+            <div id="countdown"></div>
+        </div>
+        
+    </body>
+</html>
