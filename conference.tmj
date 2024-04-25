@@ -263,7 +263,6 @@
          "name":"floorLayer",
          "objects":[
                 {
-                 "class":"area",
                  "height":320,
                  "id":18,
                  "name":"jitsiConference",
@@ -279,13 +278,13 @@
                          "value":"onaction"
                         }],
                  "rotation":0,
+                 "type":"area",
                  "visible":true,
                  "width":219.090909090909,
                  "x":32,
                  "y":96
                 }, 
                 {
-                 "class":"area",
                  "height":71.612250966399,
                  "id":19,
                  "name":"website",
@@ -311,13 +310,13 @@
                          "value":"Press SPACE or touch here to open a custom website"
                         }],
                  "rotation":0,
+                 "type":"area",
                  "visible":true,
                  "width":96,
                  "x":256,
                  "y":96
                 }, 
                 {
-                 "class":"area",
                  "height":96,
                  "id":22,
                  "name":"to-office",
@@ -328,13 +327,13 @@
                          "value":"map.tmj#from-conference"
                         }],
                  "rotation":0,
+                 "type":"area",
                  "visible":true,
                  "width":96,
                  "x":608,
                  "y":0
                 }, 
                 {
-                 "class":"area",
                  "height":32,
                  "id":23,
                  "name":"from-office",
@@ -345,10 +344,23 @@
                          "value":true
                         }],
                  "rotation":0,
+                 "type":"area",
                  "visible":true,
                  "width":32,
                  "x":640,
                  "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":24,
+                 "name":"players",
+                 "point":true,
+                 "rotation":0,
+                 "type":"variable",
+                 "visible":true,
+                 "width":0,
+                 "x":391.269699672911,
+                 "y":231.412429378531
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -362,7 +374,6 @@
          "name":"configuration",
          "objects":[
                 {
-                 "class":"variable",
                  "height":0,
                  "id":20,
                  "name":"websiteURL",
@@ -389,6 +400,7 @@
                          "value":false
                         }],
                  "rotation":0,
+                 "type":"variable",
                  "visible":true,
                  "width":0,
                  "x":304.52245019328,
@@ -467,7 +479,7 @@
          "y":0
         }],
  "nextlayerid":62,
- "nextobjectid":24,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -493,16 +505,16 @@
         {
          "name":"script",
          "type":"string",
-         "value":"src\/main.ts"
+         "value":"src\/scripts\/kb9.ts"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.9.2",
+ "tiledversion":"1.10.2",
  "tileheight":32,
  "tilesets":[
         {
          "columns":6,
          "firstgid":1,
-         "image":"tilesets\/WA_Special_Zones.png",
+         "image":"\/tilesets\/WA_Special_Zones.png",
          "imageheight":64,
          "imagewidth":192,
          "margin":0,
@@ -525,7 +537,7 @@
         {
          "columns":12,
          "firstgid":13,
-         "image":"tilesets\/WA_Decoration.png",
+         "image":"\/tilesets\/WA_Decoration.png",
          "imageheight":256,
          "imagewidth":384,
          "margin":0,
@@ -538,7 +550,7 @@
         {
          "columns":10,
          "firstgid":109,
-         "image":"tilesets\/WA_Miscellaneous.png",
+         "image":"\/tilesets\/WA_Miscellaneous.png",
          "imageheight":352,
          "imagewidth":320,
          "margin":0,
@@ -551,7 +563,7 @@
         {
          "columns":12,
          "firstgid":219,
-         "image":"tilesets\/WA_Other_Furniture.png",
+         "image":"\/tilesets\/WA_Other_Furniture.png",
          "imageheight":416,
          "imagewidth":384,
          "margin":0,
@@ -564,7 +576,7 @@
         {
          "columns":25,
          "firstgid":375,
-         "image":"tilesets\/WA_Room_Builder.png",
+         "image":"\/tilesets\/WA_Room_Builder.png",
          "imageheight":1280,
          "imagewidth":800,
          "margin":0,
@@ -577,7 +589,7 @@
         {
          "columns":13,
          "firstgid":1375,
-         "image":"tilesets\/WA_Seats.png",
+         "image":"\/tilesets\/WA_Seats.png",
          "imageheight":448,
          "imagewidth":416,
          "margin":0,
@@ -590,7 +602,7 @@
         {
          "columns":10,
          "firstgid":1557,
-         "image":"tilesets\/WA_Tables.png",
+         "image":"\/tilesets\/WA_Tables.png",
          "imageheight":864,
          "imagewidth":320,
          "margin":0,
@@ -603,7 +615,7 @@
         {
          "columns":6,
          "firstgid":1827,
-         "image":"tilesets\/WA_Logo_Long.png",
+         "image":"\/tilesets\/WA_Logo_Long.png",
          "imageheight":32,
          "imagewidth":192,
          "margin":0,
@@ -616,7 +628,7 @@
         {
          "columns":25,
          "firstgid":1833,
-         "image":"tilesets\/WA_Exterior.png",
+         "image":"\/tilesets\/WA_Exterior.png",
          "imageheight":1088,
          "imagewidth":800,
          "margin":0,
@@ -629,7 +641,7 @@
         {
          "columns":13,
          "firstgid":2683,
-         "image":"tilesets\/WA_User_Interface.png",
+         "image":"\/tilesets\/WA_User_Interface.png",
          "imageheight":672,
          "imagewidth":416,
          "margin":0,
@@ -641,6 +653,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.9",
+ "version":"1.10",
  "width":24
 }

@@ -2,7 +2,7 @@ import {ObjectWaitingRoom} from "./objectWaitingRoom";
 import {Popup} from "@workadventure/iframe-api-typings";
 
 export function onPlayerSpawn(player: any) {
-    welcome(player.name)
+    //welcome(player.name)
 }
 
 function welcome(playerName: String) {

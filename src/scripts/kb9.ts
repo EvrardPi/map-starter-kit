@@ -1,114 +1,95 @@
-
 import {bootstrapExtra} from "@workadventure/scripting-api-extra";
-import {Popup} from "@workadventure/iframe-api-typings";
-import {closePopup, onClock, onPlayerInside, onPlayerOutside, onPlayerSpawn} from "./events";
-import { ObjectWaitingRoom } from "./objectWaitingRoom";
+import {onPlayerSpawn} from "./events";
 
-let clockPopUp: Popup;
 const startGameBtnName = 'startGameBtn';
+const backToWaitingRoomBtnName = 'backToWaitingRoomBtn';
 
+// get the list of players
 async function getPlayers(): Promise<Set<string>> {
-    if (!WA.state.loadVariable('players')) { // moi j'ai mis une variable sur la carte
-        console.log('players not found, go undefined')
-        await WA.state.saveVariable('players', [])
+    let players = await WA.state.loadVariable('players') as string[];
+    if (!players) {
+        console.log('No players found, initializing to an empty array.');
+        players = [];
+        await WA.state.saveVariable('players', players);
     }
+    return new Set(players);
+}
 
-    const res = WA.state.loadVariable('players') as string[] || []
-    return new Set(res)
+// add or remove a player from the list of players
+function updatePlayers(add: boolean, uuid: string) {
+    getPlayers().then(players => {
+        if (add) {
+            players.add(uuid);
+            console.log(`Player added: ${uuid}`);
+        } else {
+            players.delete(uuid);
+            console.log(`Player removed: ${uuid}`);
+        }
+        WA.state.saveVariable('players', Array.from(players)).then(() => {
+            console.log(`Updated players list: ${Array.from(players)}`);
+        });
+    });
 }
 
 WA.onInit().then(async () => {
-
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-    console.log('Script started successfully');
-
-    // si leur code galère ici ca va bloquer
-    // await getPlayers()
-    // sound
-    // const paralysedSound = WA.sound.loadSound('../../public/sound/waitingRoom.wav')
-    // paralysedSound.play({loop: true})
-
+    console.log('Script started successfully.');
     onPlayerSpawn(WA.player);
-    // onPlayerInside(ObjectWaitingRoom.INSIDE, async () => {
-    //     if (!WA.player.uuid) {
-    //         console.error('Player UUID not found');
-    //         return;
-    //     }
+    console.log("Player spawn detected:", WA.player.uuid);
 
-    //     WA.room.hideLayer(ObjectWaitingRoom.WALLS);
-    //     // WA.event.broadcast('playerInside', WA.player.uuid);
-    //     const players = await getPlayers()
-    //     players.add(WA.player.uuid)
-    //     await WA.state.saveVariable('players', Array.from(players))
-    //     // WA.event.broadcast('players', Array.from(getPlayers()))
-    // });
-    // onPlayerOutside(ObjectWaitingRoom.OUTSIDE, async () => {
-    //     if (!WA.player.uuid) {
-    //         console.error('Player UUID not found');
-    //         return;
-    //     }
+    // add the player to the list of players
+    if (WA.player.uuid) {
+        updatePlayers(true, WA.player.uuid);
+    }
 
-    //     WA.room.showLayer(ObjectWaitingRoom.WALLS);
-    //     // WA.event.broadcast('playerOutside', WA.player.uuid);
+    WA.event.on('teleportPlayer').subscribe(async (ev) => {
+        if (WA.player.uuid === ev.data) {
+            const delay = Math.floor(Math.random() * 4) + 1;
+            await new Promise((resolve) => setTimeout(resolve, delay * 300));
+            WA.nav.goToRoom('./conference.tmj');
+            console.log("Teleported player:", WA.player.uuid);
+        }
+    });
 
-    //     const players = await getPlayers()
-    //     players.delete(WA.player.uuid)
+    WA.event.on('backTeleportPlayer').subscribe(async (ev) => {
+        if (WA.player.uuid === ev.data) {
+            const delay = Math.floor(Math.random() * 4) + 1;
+            await new Promise((resolve) => setTimeout(resolve, delay * 300));
+            WA.nav.goToRoom('./map.tmj');
+            console.log("Teleported player:", WA.player.uuid);
+        }
+    });
 
-    //     await WA.state.saveVariable('players',  Array.from(players))
-    //     // WA.event.broadcast('players', Array.from(getPlayers()))
-    // });
-
-    // WA.event.on('teleportPlayer').subscribe(async (ev) => {
-    //     if (WA.player.uuid === ev.data) {
-    //         // random delay from 1 to 5 seconds
-    //         const delay = Math.floor(Math.random() * 2) + 1;
-    //         await new Promise((resolve) => setTimeout(resolve, delay * 300));
-    //         WA.nav.goToRoom('../maps/cds.tmj');
-    //     }
-    // })
-    onClock(clockPopUp)
-
+    // button to teleport all players to the game room
     WA.ui.actionBar.addButton({
         id: startGameBtnName,
         label: 'Start game',
         callback: async (_event) => {
-            // if ((await getPlayers()).size < 2) {
-            //     const popup = WA.ui.openPopup('popup', 'You need at least 2 players to start the game', []);
-            //     setTimeout(() => closePopup(popup), 2000)
-            //     return;
-            // }
-
-            // // TELEPORT TO ROOM
-            // for (const player of Array.from((await getPlayers()).values())) {
-            //     console.log("teleport", player)
-            //     WA.event.broadcast('teleportPlayer', player)
-            // }
+            const players = await getPlayers();
+            console.log("Ready to teleport:", Array.from(players));
+            for (const player of players) {
+                console.log("Teleporting player:", player);
+                WA.event.broadcast('teleportPlayer', player);
+            }
         }
     });
 
+    // button to teleport all players back to the waiting room
     WA.ui.actionBar.addButton({
-        id: "salut mec",
-        label: 'tu passes par qui ?',
+        id: backToWaitingRoomBtnName,
+        label: 'Back to waiting room',
         callback: async (_event) => {
-            console.log("je passe par feneu test");
+            const players = await getPlayers();
+            console.log("Teleporting all players back to the waiting room:", Array.from(players));
+            for (const player of players) {
+                console.log("Teleporting player:", player);
+                WA.event.broadcast('backTeleportPlayer', player);
+            }
         }
     });
 
     bootstrapExtra().then(() => {
-        console.log('Scripting API Extra ready');
+        console.log('Scripting API Extra ready.');
     }).catch(e => console.error(e));
-
 }).catch(e => console.error(e));
-
 
 export {};

@@ -3,7 +3,8 @@
     {
      "export":
         {
-         "format":"tmx"
+         "format":"tmx",
+         "target":"map."
         }
     },
  "height":30,
@@ -530,15 +531,14 @@
                 }, 
                 {
                  "height":0,
-                 "id":9,
+                 "id":8,
                  "name":"players",
-                 "point":true,
                  "rotation":0,
                  "type":"variable",
                  "visible":true,
                  "width":0,
-                 "x":693.333333333333,
-                 "y":648
+                 "x":689.333333333333,
+                 "y":846.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -547,7 +547,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":10,
+ "nextobjectid":9,
  "orientation":"orthogonal",
  "properties":[
         {
