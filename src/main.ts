@@ -19,15 +19,25 @@ WA.onInit().then(() => {
 
     WA.room.area.onLeave('clock').subscribe(closePopup)
 
-    let noteWebsite: any;
+    WA.player.onPlayerMove(event => {
+        console.log({x: event.x / 32, y: event.y / 32, tile: Number(WA.state.tileColor), layer: "transparent"});
+        WA.room.setTiles([
+            {
+                x: Math.round(event.x / 32),
+                y: Math.round(event.y / 32),
+                tile: Number(WA.state.tileColor),
+                layer: "transparent"
+            },
+        ])
+    });
 
     WA.ui.actionBar.addButton({
         id: 'choose-tile-color-btn',
         type: 'action',
-        imageSrc: 'test',
+        imageSrc: 'https://www.iconsdb.com/icons/preview/white/square-rounded-xxl.png',
         toolTip: 'Select tile color',
         callback: async () => {
-            noteWebsite = await WA.ui.website.open({
+            await WA.ui.website.open({
                 url: "./src/html/colors.html",
                 position: {
                     vertical: "top",
@@ -44,7 +54,7 @@ WA.onInit().then(() => {
             });
         }
     });
-
+    
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
     bootstrapExtra().then(() => {
         console.log('Scripting API Extra ready');
