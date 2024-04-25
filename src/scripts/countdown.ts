@@ -10,17 +10,24 @@ WA.onInit().then(() => {
     console.log('Countdown Ready');
 
     const now = new Date();
-    const endTime = new Date(now.getTime() + 3 * 60000);
+    const endTime = new Date(now.getTime() + 10000);
     countdown.setLabels(
         'ms|s|m|h|j||||||',
         'ms|s|m|h|j||||||',
         ' ',
         ' ',
-        'maintenant');
+        'fin');
 
-    countdown(endTime,
+    let placeTileCountdown = countdown(
+        endTime,
         function(ts) {
-            countdownElement.innerHTML = ts.toHTML("strong");
+            if (ts.value >= 0) {
+                countdownElement.innerHTML = "<strong>Place a new tile</strong>";
+                WA.player.state.isTilePlaced = false;
+
+            } else {
+                countdownElement.innerHTML = "Place a new tile in : " + ts.toHTML("strong");
+            }
         },
         countdown.MINUTES|countdown.SECONDS
     );

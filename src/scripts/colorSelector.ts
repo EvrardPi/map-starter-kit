@@ -27,8 +27,9 @@ WA.onInit().then(() => {
         // Add click event listener to emit the selected color
         colorBox.addEventListener("click", async () => {
             // ici rajouter sur la map l'objet tileColor pour stocker 
-            WA.player.state.isTilePlaced = false;
+            WA.player.state.isTilePlaced = false
             WA.player.state.tileColor = ColorTiles[color];
+            
             console.log(WA.player.state.tileColor);
             const allIframes = await WA.ui.website.getAll();
             const colorsMenuIframe = allIframes.find(iframe => iframe.url === './src/html/colors.html')
