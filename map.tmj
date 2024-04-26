@@ -228,7 +228,7 @@
                 {
                  "height":0,
                  "id":5,
-                 "name":"isTilePlaced",
+                 "name":"canPlaceTile",
                  "point":true,
                  "rotation":0,
                  "type":"variable",

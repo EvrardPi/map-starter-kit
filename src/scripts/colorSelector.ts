@@ -1,6 +1,7 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import { ColorCodes, ColorTiles } from "./colorCodes";
+
 console.log('Script started successfully');
 
 const colorSelector = document.getElementById('optionSelector') as HTMLDivElement;
@@ -23,27 +24,38 @@ WA.onInit().then(() => {
         boxLabel.setAttribute("for", color);
         boxLabel.classList.add("checkbox-label");
         boxLabel.style.backgroundColor = '#' + ColorCodes[color];
-
-        // Add click event listener to emit the selected color
+  
         colorBox.addEventListener("click", async () => {
-            // ici rajouter sur la map l'objet tileColor pour stocker 
-            WA.player.state.isTilePlaced = false
-            WA.player.state.tileColor = ColorTiles[color];
-            
-            console.log(WA.player.state.tileColor);
-            const allIframes = await WA.ui.website.getAll();
-            const colorsMenuIframe = allIframes.find(iframe => iframe.url === './src/html/colors.html')
-            if(colorsMenuIframe){
-                colorsMenuIframe.close();
+            if(WA.player.state.canPlaceTile){
+                WA.player.state.tileColor = ColorTiles[color];
             }
         });
 
-        // Append the color box to the colorSelector div
-        colorSelector.appendChild(colorBox);
-        colorSelector.appendChild(boxLabel);
+        if (WA.player.state.canPlaceTile){
+            colorSelector.appendChild(colorBox);
+            colorSelector.appendChild(boxLabel);
+        } 
     }
 
-    
+
+
+    // if(!WA.player.state.canPlaceTile){
+    //     if(placeTileCountdown){
+
+    //     }
+    //     let placeTileCountdown = countdown(
+    //         endTime,
+    //         function(ts) {
+    //             if (ts.value < 0) {
+    //                 colorSelector.innerHTML = ts.toHTML("strong");
+    //             } else {
+    //                 WA.player.state.canPlaceTile = true;
+    //             }
+    //         },
+    //         countdown.MINUTES|countdown.SECONDS
+    //     );
+    // }
+ 
 }).catch(e => console.error(e));
 
 export {};
