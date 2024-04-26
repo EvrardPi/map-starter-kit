@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script defer src="./bar.ts"></script>
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    <title>Bar des Maps</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f900;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .maps {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column; /* Aligner les boutons verticalement */
+            align-items: center; /* Centrer horizontalement les boutons */
+        }
+
+        .map-button {
+            border: none;
+            border-radius: 4px;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 150px; /* Largeur fixe pour tous les boutons */
+        }
+
+        #bronze {
+            background-color: #cd7f32; /* Bronze */
+        }
+
+        #silver {
+            background-color: #c0c0c0; /* Silver */
+        }
+
+        #gold {
+            background-color: #ffd700; /* Gold */
+        }
+
+        .map-button:hover {
+            filter: brightness(90%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sélectionnez votre Map</h1>
+        <div class="maps">            
+            <button class="map-button" id="gold">Gold Map</button>
+            <button class="map-button" id="silver">Silver Map</button>
+            <button class="map-button" id="bronze">Bronze Map</button>
+        </div>
+    </div>          
+</body>
+</html>

@@ -1,8 +1,9 @@
 import {bootstrapExtra} from "@workadventure/scripting-api-extra";
 import {onPlayerSpawn} from "./events";
 
-const startGameBtnName = 'startGameBtn';
+//const startGameBtnName = 'startGameBtn';
 const backToWaitingRoomBtnName = 'backToWaitingRoomBtn';
+const openBarBtnName = 'openBarBtn';
 
 // get the list of players
 async function getPlayers(): Promise<Set<string>> {
@@ -45,7 +46,7 @@ WA.onInit().then(async () => {
         if (WA.player.uuid === ev.data) {
             const delay = Math.floor(Math.random() * 4) + 1;
             await new Promise((resolve) => setTimeout(resolve, delay * 300));
-            WA.nav.goToRoom('./conference.tmj');
+            WA.nav.goToRoom('./map_gold.tmj');
             console.log("Teleported player:", WA.player.uuid);
         }
     });
@@ -59,24 +60,48 @@ WA.onInit().then(async () => {
         }
     });
 
-    // button to teleport all players to the game room
+    // // button to teleport all players to the game room
+    // WA.ui.actionBar.addButton({
+    //     id: startGameBtnName,
+    //     label: 'Start game',
+    //     callback: async (_event) => {
+    //         const players = await getPlayers();
+    //         console.log("Ready to teleport:", Array.from(players));
+    //         for (const player of players) {
+    //             console.log("Teleporting player:", player);
+    //             WA.event.broadcast('teleportPlayer', player);
+    //         }
+    //     }
+    // });
+
+    // button to open the bar page
     WA.ui.actionBar.addButton({
-        id: startGameBtnName,
-        label: 'Start game',
-        callback: async (_event) => {
-            const players = await getPlayers();
-            console.log("Ready to teleport:", Array.from(players));
-            for (const player of players) {
-                console.log("Teleporting player:", player);
-                WA.event.broadcast('teleportPlayer', player);
-            }
+        id: openBarBtnName,
+        label: 'Maps',
+        callback: () => {
+            WA.ui.website.open({
+                url: "./src/bar/bar.html",
+                position: {
+                    vertical: "middle",
+                    horizontal: "middle",
+                },
+                size: {
+                    height: "80vh",
+                    width: "50vh",
+                },
+                margin: {
+                    right: "12px",
+                },
+                allowApi: true,
+            });
+            console.log("Bar page opened");
         }
-    });
+    });   
 
     // button to teleport all players back to the waiting room
     WA.ui.actionBar.addButton({
         id: backToWaitingRoomBtnName,
-        label: 'Back to waiting room',
+        label: 'Waiting Room',
         callback: async (_event) => {
             const players = await getPlayers();
             console.log("Teleporting all players back to the waiting room:", Array.from(players));
@@ -85,7 +110,7 @@ WA.onInit().then(async () => {
                 WA.event.broadcast('backTeleportPlayer', player);
             }
         }
-    });
+    });  
 
     bootstrapExtra().then(() => {
         console.log('Scripting API Extra ready.');
