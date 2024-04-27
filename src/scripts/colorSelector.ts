@@ -25,9 +25,11 @@ WA.onInit().then(() => {
         boxLabel.style.backgroundColor = '#' + ColorCodes[color];
 
         colorBox.addEventListener("click", async () => {
+            console.log('Color selected: ', color); // Confirmer la couleur sélectionnée
             if(WA.player.state.canPlaceTile){
                 WA.player.state.tileColor = ColorTiles[color];
-                console.log('Tile color selected: ', ColorTiles[color]);
+                console.log('Tile color selected: ', ColorTiles[color]); // Confirmer le numéro de tuile sélectionné
+                console.log('Expected color: ', ColorCodes[color]); // Ajouter le log de la couleur attendue
             }
         });        
 

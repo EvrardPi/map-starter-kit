@@ -12,14 +12,14 @@ export enum ColorCodes {
 }
 
 export enum ColorTiles{
-    red = 159,
-    orange = 231,
-    yellow = 3173,
-    green = 2931,
-    lightBlue = 3222,
-    darkBlue = 195,
-    purple = 3012,
-    pink = 3048,
-    white = 3093,
-    black = 3133
+    red = 171,
+    orange = 243,
+    yellow = 3185,
+    green = 2943,
+    lightBlue = 3234,
+    darkBlue = 207,
+    purple = 3024,
+    pink = 3060,
+    white = 3105,
+    black = 3145
 }
