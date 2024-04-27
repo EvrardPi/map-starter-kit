@@ -5,33 +5,34 @@ import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 console.log('Script started successfully');
 const backToWaitingRoomBtnName = 'backToWaitingRoomBtn';
 
-async function getPlayers(): Promise<Set<string>> {
-    let players = await WA.state.loadVariable('players') as string[];
-    if (!players) {
-        console.log('No players found, initializing to an empty array.');
-        players = [];
-        await WA.state.saveVariable('players', players);
-    }
-    return new Set(players);
-}
+// async function getPlayers(): Promise<Set<string>> {
+//     let players = await WA.state.loadVariable('players') as string[];
+//     if (!players) {
+//         console.log('No players found, initializing to an empty array.');
+//         players = [];
+//         await WA.state.saveVariable('players', players);
+//     }
+//     return new Set(players);
+// }
 
 // Waiting for the API to be ready
 WA.onInit().then(() => {
+    WA.player.state.canPlaceTile = true;
     WA.player.onPlayerMove(event => {
-        if(!WA.player.state.isTilePlaced){
+        if(WA.player.state.canPlaceTile && WA.player.state.tileColor){
 
-            console.log({x: event.x / 32, y: event.y / 32, tile: Number(WA.state.tileColor), layer: "transparent"});
+            console.log({x: event.x / 32, y: event.y / 32, tile: Number(WA.player.state.tileColor), layer: "transparent"});
             WA.room.setTiles([
                 {
                     x: Math.round(event.x / 32),
                     y: Math.round(event.y / 32),
-                    tile: Number(WA.state.tileColor),
+                    tile: Number(WA.player.state.tileColor),
                     layer: "transparent"
                 },
             ])
-            WA.player.state.isTilePlaced = true;
+            WA.player.state.canPlaceTile = false;
 
-            WA.state.onVariableChange('map').subscribe((value) => {
+            WA.state.onVariableChange('map').subscribe((value: any) => {
                 WA.room.setTiles([
                     {
                         x: value.x,
@@ -46,34 +47,21 @@ WA.onInit().then(() => {
             WA.state.saveVariable('map', {
                 'x': Math.round(event.x / 32),
                 'y': Math.round(event.y / 32),
-                tile: Number(WA.state.tileColor),
+                tile: Number(WA.player.state.tileColor),
             }).catch(e => console.error('Something went wrong while saving variable', e));
-        }
-    });
 
-    const timer = WA.ui.website.open({
-        url: "./src/html/countdown.html",
-        position: {
-            vertical: "top",
-            horizontal: "middle",
-        },
-        size: {
-            height: "10vh",
-            width: "90vw",
-        },
-        margin: {
-            top: "5vh",
-        },
-        allowApi: true,
+        }
     });
 
     WA.ui.actionBar.addButton({
         id: 'choose-tile-color-btn',
         type: 'action',
-        imageSrc: 'https://www.iconsdb.com/icons/preview/white/square-rounded-xxl.png',
+        imageSrc: 'public/images/tileIcon.png',
         toolTip: 'Select tile color',
         callback: async () => {
-            await WA.ui.website.open({
+            if(!WA.player.state.canPlaceTile) return;
+
+            const colorPopup = await WA.ui.website.open({
                 url: "./src/html/colors.html",
                 position: {
                     vertical: "top",
@@ -87,7 +75,36 @@ WA.onInit().then(() => {
                     top: "77vh",
                 },
                 allowApi: true,
-            });
+            });   
+
+            let interval: any;
+            WA.player.state.onVariableChange('tileColor')
+            .subscribe((value) => {
+                if(value) colorPopup.close();
+            })
+
+            WA.player.state.onVariableChange('canPlaceTile')
+            .subscribe((value) => {
+                if(!value) {
+                    colorPopup.close();
+                    let countdown = 10;
+                    interval = setInterval(() => {
+                        WA.ui.banner.openBanner({
+                            id: "countdown-banner",
+                            text: `Place a new tile in ${countdown}s`,
+                            bgColor: "#56EAFF",
+                            textColor: "#000000",
+                            timeToClose: 1000,
+                        });
+                        countdown--;
+                        if(countdown === 0) { 
+                            clearInterval(interval);
+                            WA.player.state.canPlaceTile = true;
+                            WA.player.state.tileColor = null;
+                        }
+                    }, 1000);
+                } else clearInterval(interval);
+            })         
         }
     });
 

@@ -9,7 +9,7 @@ WA.onInit().then(() => {
         const button = document.getElementById(key);
         button?.addEventListener('click', async () => {
             const mapName = mapButtons[key];
-            WA.nav.goToRoom(`https://play.workadventu.re/_/0dmztclzsjv5/67b0-46-193-57-71.ngrok-free.app/${mapName}`);
+            WA.nav.goToRoom(`https://play.workadventu.re/_/ixta2r3w9p/2d8f-77-132-167-143.ngrok-free.app/${mapName}`);
         });
     });
 });
