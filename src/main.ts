@@ -1,6 +1,7 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
+import { displayNotificationCanPlaceTile } from "./scripts/events";
 
 console.log('Script started successfully');
 const backToWaitingRoomBtnName = 'backToWaitingRoomBtn';
@@ -53,10 +54,14 @@ WA.onInit().then(() => {
         }
     });
 
+    // WA.event.on("canPlaceTile").subscribe((data) => {
+        // displayNotificationCanPlaceTile()
+    // })
+
     WA.ui.actionBar.addButton({
         id: 'choose-tile-color-btn',
         type: 'action',
-        imageSrc: 'public/images/tileIcon.png',
+        imageSrc: 'https://i.postimg.cc/RZnmV5v6/test-2.png',
         toolTip: 'Select tile color',
         callback: async () => {
             if(!WA.player.state.canPlaceTile) return;
@@ -77,34 +82,22 @@ WA.onInit().then(() => {
                 allowApi: true,
             });   
 
-            let interval: any;
+            // let interval: any;
             WA.player.state.onVariableChange('tileColor')
             .subscribe((value) => {
                 if(value) colorPopup.close();
             })
 
             WA.player.state.onVariableChange('canPlaceTile')
-            .subscribe((value) => {
-                if(!value) {
-                    colorPopup.close();
-                    let countdown = 10;
-                    interval = setInterval(() => {
-                        WA.ui.banner.openBanner({
-                            id: "countdown-banner",
-                            text: `Place a new tile in ${countdown}s`,
-                            bgColor: "#56EAFF",
-                            textColor: "#000000",
-                            timeToClose: 1000,
-                        });
-                        countdown--;
-                        if(countdown === 0) { 
-                            clearInterval(interval);
-                            WA.player.state.canPlaceTile = true;
-                            WA.player.state.tileColor = null;
-                        }
-                    }, 1000);
-                } else clearInterval(interval);
-            })         
+            .subscribe(async (value) => {
+                if (!value) {
+                    displayNotificationCanPlaceTile()
+                    //triger event
+                    // await WA.event.broadcast("canPlaceTile", null)
+                    // }, 1000);
+                }
+                //  else clearInterval(interval);
+            })
         }
     });
 

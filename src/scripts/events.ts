@@ -17,3 +17,25 @@ export function closePopup(popUp: Popup) {
         popUp.close();
     }
 }
+
+export function displayNotificationCanPlaceTile() {
+    // colorPopup.close();
+    let countdown = 10;
+    const interval = setInterval(() => {
+        WA.ui.banner.openBanner({
+            id: "countdown-banner",
+            text: `Place a new tile in ${countdown}s`,
+            bgColor: "#56EAFF",
+            textColor: "#000000",
+            timeToClose: 1000,
+        });
+
+        countdown--;
+
+        if (countdown === 0) { 
+            clearInterval(interval);
+            WA.player.state.canPlaceTile = true;
+            WA.player.state.tileColor = null;
+        }
+    }, 1000)
+}
