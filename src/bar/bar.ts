@@ -14,7 +14,7 @@ WA.onInit().then(() => {
             const instanceId = Math.random().toString(36).substring(2, 15);
             let url = `https://play.workadventu.re/_/${instanceId}/${host}/map-starter-kit/${mapName}`;
 
-            if (host === 'localhost') {
+            if (host === 'localhost:5173') {
                 url = `https://play.workadventu.re/_/${instanceId}/${host}/${mapName}`;
             }
             WA.nav.goToRoom(url);
