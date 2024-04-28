@@ -8,9 +8,9 @@
 - Construction des différentes cartes (Sébastien)
 
 # Nom et pseudo de chaque développeur
-Sébastien RAMIREZ -> SebRamZz
-Lucie GODARD -> lucie1704
-Pierre EVRARD -> EvrardPi
+- Sébastien RAMIREZ -> SebRamZz
+- Lucie GODARD -> lucie1704
+- Pierre EVRARD -> EvrardPi
 
 # Procédure d’installation et de lancement de votre solution
 npm i
