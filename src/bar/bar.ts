@@ -19,3 +19,5 @@ WA.onInit().then(() => {
         });
     });
 });
+
+export {};
