@@ -13,5 +13,5 @@
 - Pierre EVRARD -> EvrardPi
 
 # Procédure d’installation et de lancement de votre solution
-npm i
-npx vite --host 0.0.0.0
+- npm i
+- npx vite --host 0.0.0.0
