@@ -2,7 +2,7 @@ import {bootstrapExtra} from "@workadventure/scripting-api-extra";
 import {onPlayerSpawn} from "./events";
 
 //const startGameBtnName = 'startGameBtn';
-const backToWaitingRoomBtnName = 'backToWaitingRoomBtn';
+// const backToWaitingRoomBtnName = 'backToWaitingRoomBtn';
 const openBarBtnName = 'openBarBtn';
 
 // get the list of players
@@ -99,18 +99,18 @@ WA.onInit().then(async () => {
     });   
 
     // button to teleport all players back to the waiting room
-    WA.ui.actionBar.addButton({
-        id: backToWaitingRoomBtnName,
-        label: 'Waiting Room',
-        callback: async (_event) => {
-            const players = await getPlayers();
-            console.log("Teleporting all players back to the waiting room:", Array.from(players));
-            for (const player of players) {
-                console.log("Teleporting player:", player);
-                WA.event.broadcast('backTeleportPlayer', player);
-            }
-        }
-    });  
+    // WA.ui.actionBar.addButton({
+    //     id: backToWaitingRoomBtnName,
+    //     label: 'Waiting Room',
+    //     callback: async (_event) => {
+    //         const players = await getPlayers();
+    //         console.log("Teleporting all players back to the waiting room:", Array.from(players));
+    //         for (const player of players) {
+    //             console.log("Teleporting player:", player);
+    //             WA.event.broadcast('backTeleportPlayer', player);
+    //         }
+    //     }
+    // });
 
     bootstrapExtra().then(() => {
         console.log('Scripting API Extra ready.');
