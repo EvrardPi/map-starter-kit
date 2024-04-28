@@ -30,6 +30,8 @@ export default defineConfig({
                 bar_ts: "./src/bar/bar.ts",
                 bar_html: "./src/bar/bar.html",
                 color: "./src/html/colors.html",
+                color_code: "./src/scripts/colorCodes.ts",
+                color_selector: "./src/scripts/colorSelector.ts",
                 ...getMapsScripts(maps),
             },
         },
