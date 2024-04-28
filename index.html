@@ -11,7 +11,7 @@
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
     <script>
         window.onload = function () {
-            const host = "2d8f-77-132-167-143.ngrok-free.app"
+            const host = window.location.host;
             let path = window.location.pathname;
             if (path.endsWith('index.html')) {
                 path = path.substr(path, path.length - 'index.html'.length);
@@ -22,7 +22,8 @@
             document.getElementById('testMapBtnURL').href = url;
             document.getElementById('testMapURL').innerText = url;
 
-            const tmjURL = window.location.protocol + '//' + host + path + 'map.tmj';
+            const tmjURL = window.location.protocol + '//' + window.location.host + path + 'map.tmj';
+            //const tmjURL = window.location.protocol + '//' + host + path + 'map.tmj';
             document.getElementById('tmjURL').innerText = tmjURL;
 
             const gettingStartedLink = 'https://workadventu.re/getting-started?name=Map&mapUrl=' + tmjURL;

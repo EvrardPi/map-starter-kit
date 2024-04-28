@@ -9,7 +9,13 @@ WA.onInit().then(() => {
         const button = document.getElementById(key);
         button?.addEventListener('click', async () => {
             const mapName = mapButtons[key];
-            WA.nav.goToRoom(`https://play.workadventu.re/_/ixta2r3w9p/2d8f-77-132-167-143.ngrok-free.app/${mapName}`);
+
+            const host = window.location.host;
+            const instanceId = Math.random().toString(36).substring(2, 15);
+            const url = `https://play.workadventu.re/_/${instanceId}/${host}/${mapName}`;
+
+            WA.nav.goToRoom(url);
+            //WA.nav.goToRoom(`https://play.workadventu.re/_/ixta2r3w9p/2d8f-77-132-167-143.ngrok-free.app/${mapName}`);
         });
     });
 });
