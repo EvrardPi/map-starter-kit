@@ -32,6 +32,7 @@ export default defineConfig({
                 color: "./src/html/colors.html",
                 color_code: "./src/scripts/colorCodes.ts",
                 color_selector: "./src/scripts/colorSelector.ts",
+                objectWaiting: "./src/scripts/objectWaitingRoom.ts",
                 ...getMapsScripts(maps),
             },
         },
